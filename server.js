@@ -2,6 +2,16 @@ const express = require('express')
 const path = require('path')
 
 const app = express();
+const notes = [
+  {
+    id: 1,
+    text: 'Note one'
+  },
+  {
+    id: 2,
+    text: 'Note two'
+  }
+]
 
 
 // Base route - domain.com (root route) is represented by a '/' - this slash directly follows the domain (domain.com/)
@@ -17,6 +27,30 @@ app.use(express.static('./public'))
 app.get('/about', (requestObj, responseObj) => {
   responseObj.sendFile(path.join(__dirname, './public/about.html'));
 })
+
+app.get('/note', (requestObj, responseObj) => {
+  const id = requestObj.query.note_id;
+  console.log(id)
+  responseObj.sendFile(path.join(__dirname, './public/note.html'));
+})
+
+app.get('/notes', (requestObj, responseObj) => {
+  responseObj.json(notes)
+})
+
+app.get('/api/notes', (requestObj, responseObj) => {
+  responseObj.json(notes)
+})
+
+app.get('/api/note/:noteId', (requestObj, responseObj) => {
+  const id = requestObj.params.noteId
+  
+  const note = notes.find(noteObj => noteObj.id == id)
+
+
+  responseObj.json(note);
+})
+
 
 
 
