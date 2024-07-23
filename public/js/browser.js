@@ -2,7 +2,7 @@ const noteOutput = document.querySelector('.note-output')
 
 
 async function getNotes(){
-    const res = await fetch ('/notes')
+    const res = await fetch ('/api/notes')
     const notes = await res.json()
     
 
