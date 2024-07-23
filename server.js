@@ -19,7 +19,7 @@ app.use(express.static('./public'))
 
 // Allow form data to be attached in our routes
 
-app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 
 // Loud Routes
 app.use('/', view_routes)
